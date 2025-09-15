@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ارائه: انرژی سازان صنعت پویا - اتوماسیون صنعتی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #003366; /* Dark Blue, similar to Siemens */
+            --secondary-color: #009999; /* Teal/Cyan */
+            --accent-color: #FFC400; /* Yellow/Orange for highlights */
+            --text-color: #333;
+            --light-bg: #f4f7f6;
+            --dark-bg: #2c3e50;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            direction: rtl; /* Right-to-left for Persian */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            scroll-behavior: smooth; /* Smooth scroll between sections */
+            height: 100vh; /* Make body full height */
+            /* Ensure the body itself is scrollable if needed, though container handles it */
+        }
+
+        /* Container for slides */
+        .presentation-container {
+            height: 100vh; /* Full viewport height */
+            overflow-y: scroll; /* Enable vertical scrolling */
+            scroll-snap-type: y mandatory; /* Snap to sections */
+            -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+        }
+
+        /* Each section acts as a slide */
+        section {
+            width: 100%;
+            min-height: 100vh; /* Minimum full viewport height for each slide */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            scroll-snap-align: start; /* Snap to the start of the section */
+            position: relative; /* For background images/overlays */
+            color: #fff; /* Default text color for dark backgrounds */
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 1.1em;
+            overflow: auto; /* Allow content inside section to scroll if it exceeds 100vh */
+        }
+
+        /* Backgrounds for specific slides */
+        #intro {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('https://images.unsplash.com/photo-1629851603513-2b6e7a2a0d9b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+        }
+
+        #about {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        #why-us {
+            background: linear-gradient(rgba(0, 153, 153, 0.85), rgba(0, 153, 153, 0.85)), url('https://images.unsplash.com/photo-1555252875-c99e431e34ff?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+        }
+
+        #services {
+            background-color: #fff;
+            color: var(--text-color);
+        }
+
+        #process {
+            background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.9)), url('https://images.unsplash.com/photo-1516321497487-e288ad716757?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+        }
+
+        #contact {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* General heading style for slides */
+        section h1, section h2 {
+            font-size: 2.8em; /* Slightly reduced */
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: inherit; /* Inherit color from section */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        section p {
+            font-size: 1.2em; /* Slightly reduced */
+            max-width: 800px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: inherit;
+        }
+
+        section .btn {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            display: inline-block;
+        }
+
+        section .btn:hover {
+            background-color: #e6b100;
+        }
+
+        /* About section specifics */
+        #about .content {
+            display: flex;
+            flex-direction: row-reverse; /* Text on right, image on left */
+            align-items: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin-top: 30px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: center; /* Center items when wrapped */
+        }
+
+        #about .text-content {
+            flex: 1;
+            min-width: 300px; /* Ensure text content has a minimum width */
+            text-align: right;
+            max-width: 600px;
+            padding: 10px 20px; /* Adjusted padding */
+            box-sizing: border-box;
+        }
+        #about .text-content h3 {
+            color: var(--primary-color);
+            font-size: 1.7em; /* Slightly reduced */
+            margin-bottom: 15px;
+        }
+
+        #about .image-content {
+            flex: 1;
+            min-width: 250px; /* Ensure image content has a minimum width */
+            max-width: 400px; /* Max width for image */
+            text-align: left;
+            padding: 10px;
+        }
+        #about .image-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Why Us section specifics */
+        #why-us h2 {
+            color: #fff;
+        }
+        #why-us .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Min column width adjusted */
+            gap: 25px; /* Slightly reduced gap */
+            margin-top: 40px;
+            max-width: 1000px;
+            padding: 0 10px; /* Added padding for smaller screens */
+        }
+
+        #why-us .item {
+            background-color: rgba(255,255,255,0.15); /* Slightly transparent background */
+            backdrop-filter: blur(5px); /* Optional: blur background for readability */
+            padding: 20px; /* Slightly reduced padding */
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex; /* Use flex for internal centering */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #why-us .item:hover {
+            transform: translateY(-10px);
+        }
+        #why-us .item .icon {
+            font-size: 2.2em; /* Slightly reduced */
+            color: var(--accent-color);
+            margin-bottom: 10px; /* Slightly reduced margin */
+        }
+        #why-us .item h3 {
+            font-size: 1.3em; /* Slightly reduced */
+            color: #fff;
+            margin-bottom: 8px; /* Slightly reduced margin */
+        }
+        #why-us .item p {
+            font-size: 0.9em;
+            color: #f0f0f0;
+            margin-bottom: 0;
+            max-width: none; /* Override default max-width */
+        }
+
+        /* Services section specifics */
+        #services h2 {
+            color: var(--primary-color);
+        }
+        #services .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Min column width adjusted */
+            gap: 20px; /* Slightly reduced gap */
+            margin-top: 30px; /* Slightly reduced margin */
+            max-width: 1000px;
+            padding: 0 10px; /* Added padding for smaller screens */
+        }
+
+        #services .service-item {
+            background-color: var(--light-bg);
+            padding: 20px; /* Slightly reduced padding */
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--secondary-color);
+            color: var(--text-color);
+            display: flex; /* Use flex for internal centering */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #services .service-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        #services .service-item .icon {
+            font-size: 2.5em; /* Slightly reduced */
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        #services .service-item h3 {
+            font-size: 1.2em; /* Slightly reduced */
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        #services .service-item p {
+            font-size: 0.85em; /* Slightly reduced */
+            color: var(--text-color);
+            margin-bottom: 0;
+            max-width: none;
+        }
+
+        /* Process section specifics */
+        #process h2 {
+            color: #fff;
+        }
+        #process .process-flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px; /* Slightly reduced gap */
+            margin-top: 30px; /* Slightly reduced margin */
+            max-width: 1000px;
+            padding: 0 10px; /* Added padding for smaller screens */
+        }
+
+        #process .step {
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px; /* Slightly reduced padding */
+            text-align: center;
+            flex: 1;
+            min-width: 180px; /* Adjusted min-width */
+            max-width: 250px; /* Adjusted max-width */
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            display: flex; /* Use flex for internal centering */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #process .step:hover {
+            transform: translateY(-5px);
+        }
+        #process .step .step-number {
+            font-size: 2.2em; /* Slightly reduced */
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 8px; /* Slightly reduced margin */
+            display: block;
+        }
+        #process .step h3 {
+            font-size: 1.2em; /* Slightly reduced */
+            color: #fff;
+            margin-bottom: 8px; /* Slightly reduced margin */
+        }
+        #process .step p {
+            font-size: 0.85em; /* Slightly reduced */
+            color: #f0f0f0;
+            max-width: none;
+        }
+
+        /* Contact section specifics */
+        #contact h2 {
+            color: var(--primary-color);
+        }
+        #contact .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Slightly reduced gap */
+            margin-top: 25px; /* Slightly reduced margin */
+            text-align: right;
+            max-width: 600px;
+            padding: 0 10px; /* Added padding for smaller screens */
+        }
+        #contact .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align to right */
+            font-size: 1em; /* Slightly reduced */
+            color: var(--text-color);
+        }
+        #contact .contact-item i {
+            color: var(--secondary-color);
+            margin-right: 10px; /* Slightly reduced margin */
+            font-size: 1.3em; /* Slightly reduced */
+            min-width: 25px; /* Ensure icons align */
+            text-align: center;
+        }
+        #contact .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        #contact .contact-item a:hover {
+            color: var(--secondary-color);
+        }
+        #contact .contact-details p {
+            color: var(--text-color);
+            font-size: 1em; /* Slightly reduced */
+            text-align: right;
+            max-width: none;
+            margin-bottom: 0; /* Ensure no extra margin for contact details */
+        }
+        #contact .social-links {
+            margin-top: 25px; /* Slightly reduced margin */
+        }
+        #contact .social-links a {
+            color: var(--primary-color);
+            font-size: 1.8em; /* Slightly reduced */
+            margin: 0 8px; /* Slightly reduced margin */
+            transition: color 0.3s ease;
+        }
+        #contact .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Navigation dots */
+        .nav-dots {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1001;
+        }
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .nav-dot.active {
+            background-color: var(--accent-color);
+            transform: scale(1.2);
+            border-color: var(--accent-color);
+        }
+        /* Adjust dot color for light sections */
+        #about + .nav-dots .nav-dot,
+        #services + .nav-dots .nav-dot,
+        #contact + .nav-dots .nav-dot {
+             background-color: rgba(0,0,0,0.3);
+             border-color: rgba(0,0,0,0.2);
+        }
+        #about.active + .nav-dots .nav-dot.active,
+        #services.active + .nav-dots .nav-dot.active,
+        #contact.active + .nav-dots .nav-dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* Scroll indicator (optional) */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 25px; /* Adjusted bottom position */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1.1em; /* Slightly reduced */
+            animation: bounce 2s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.8;
+            pointer-events: none; /* Make it non-interactive */
+        }
+        .scroll-indicator i {
+            font-size: 1.8em; /* Slightly reduced */
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+        /* Hide scroll indicator on last slide */
+        section:last-of-type .scroll-indicator {
+            display: none;
+        }
+        /* Adjust scroll indicator color for light sections */
+        #about .scroll-indicator, #services .scroll-indicator, #contact .scroll-indicator {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            section {
+                padding: 20px 15px; /* Reduced padding for very small screens */
+                font-size: 1em; /* Base font size adjusted */
+            }
+            section h1 {
+                font-size: 2em; /* Smaller H1 */
+                margin-bottom: 15px;
+            }
+            section h2 {
+                font-size: 1.8em; /* Smaller H2 */
+                margin-bottom: 15px;
+            }
+            section p {
+                font-size: 0.95em; /* Smaller paragraphs */
+                max-width: 100%; /* Allow paragraphs to take full width */
+                margin-bottom: 20px;
+            }
+            section .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            /* About Section */
+            #about .content {
+                flex-direction: column;
+                gap: 20px;
+                margin-top: 20px;
+            }
+            #about .text-content {
+                text-align: center;
+                max-width: 100%;
+                padding: 0;
+            }
+            #about .text-content h3 {
+                font-size: 1.5em;
+            }
+            #about .image-content {
+                order: -1; /* Image above text on small screens */
+                max-width: 90%; /* Max width for image on small screens */
+                padding: 0;
+            }
+
+            /* Grid Sections (Why Us, Services) */
+            #why-us .grid, #services .grid, #process .process-flow {
+                grid-template-columns: 1fr; /* Single column layout */
+                gap: 15px;
+                margin-top: 25px;
+                padding: 0;
+            }
+            #why-us .item, #services .service-item, #process .step {
+                padding: 15px;
+            }
+            #why-us .item h3, #services .service-item h3, #process .step h3 {
+                font-size: 1.1em;
+            }
+            #why-us .item p, #services .service-item p, #process .step p {
+                font-size: 0.8em;
+            }
+
+            /* Contact Section */
+            #contact .contact-details {
+                text-align: center; /* Center contact details */
+                gap: 10px;
+                margin-top: 20px;
+                padding: 0;
+            }
+            #contact .contact-item {
+                justify-content: center; /* Center items in contact details */
+                font-size: 0.95em;
+            }
+            #contact .contact-item i {
+                margin-right: 8px; /* Slightly reduced margin */
+                font-size: 1.2em;
+            }
+            #contact .social-links {
+                margin-top: 20px;
+            }
+            #contact .social-links a {
+                font-size: 1.5em;
+                margin: 0 6px;
+            }
+            .nav-dots {
+                display: none; /* Hide dots on small screens */
+            }
+        }
+
+        /* Specific adjustments for very narrow views (e.g., ~320px width) */
+        @media (max-width: 480px) {
+            section h1 {
+                font-size: 1.8em;
+            }
+            section h2 {
+                font-size: 1.6em;
+            }
+            section p {
+                font-size: 0.9em;
+            }
+            #about .text-content h3 {
+                font-size: 1.3em;
+            }
+            #contact .contact-item {
+                flex-direction: column; /* Stack icon and text for super narrow screens */
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9em;
+                line-height: 1.3;
+            }
+            #contact .contact-item i {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Introduction -->
+        <section id="intro">
+            <h1>انرژی سازان صنعت پویا</h1>
+            <p>پیشرو در راهکارهای جامع اتوماسیون صنعتی</p>
+            <a href="#about" class="btn">بیشتر بدانید</a>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+                <span>پایین بکشید</span>
+            </div>
+        </section>
+
+        <!-- Slide 2: About Us -->
+        <section id="about">
+            <h2>درباره ما</h2>
+            <div class="content">
+                <div class="text-content">
+                    <h3>ماموریت و چشم‌انداز</h3>
+                    <p>شرکت <strong>انرژی سازان صنعت پویا</strong> با تکیه بر سال‌ها تجربه و تخصص در حوزه اتوماسیون صنعتی، متعهد به ارائه راهکارهای نوین و کارآمد به صنایع کشور است. ماموریت ما، افزایش چشمگیر بهره‌وری، بهینه‌سازی فرآیندها و کاهش هزینه‌های عملیاتی مشتریان با استفاده از پیشرفته‌ترین فناوری‌های روز دنیاست.</p>
+                    <p>چشم‌انداز ما، تبدیل شدن به شریک فناورانه مورد اعتماد و پیشرو در ارائه راهکارهای تحول دیجیتال صنعتی در منطقه و کمک به توسعه زیرساخت‌های هوشمند کشور می‌باشد.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://images.unsplash.com/photo-1581093582489-026075905d51?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial environment">
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+                <span>پایین بکشید</span>
+            </div>
+        </section>
+
+        <!-- Slide 3: Why Choose Us -->
+        <section id="why-us">
+            <h2>چرا انرژی سازان صنعت پویا؟</h2>
+            <div class="grid">
+                <div class="item">
+                    <div class="icon"><i class="fas fa-medal"></i></div>
+                    <h3>تخصص و تجربه</h3>
+                    <p>تیمی از مهندسان مجرب و متخصص با دانش عمیق در زمینه اتوماسیون.</p>
+                </div>
+                <div class="item">
+                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>راهکارهای نوآورانه</h3>
+                    <p>ارائه به‌روزترین و خلاقانه‌ترین راه‌حل‌ها متناسب با نیازهای شما.</p>
+                </div>
+                <div class="item">
+                    <div class="icon"><i class="fas fa-headset"></i></div>
+                    <h3>پشتیبانی همه‌جانبه</h3>
+                    <p>خدمات پس از فروش و پشتیبانی فنی مطمئن و در دسترس.</p>
+                </div>
+                <div class="item">
+                    <div class="icon"><i class="fas fa-handshake"></i></div>
+                    <h3>رویکرد مشتری‌محور</h3>
+                    <p>درک نیازها و ارائه راهکارهای سفارشی برای هر مشتری.</p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+                <span>پایین بکشید</span>
+            </div>
+        </section>
+
+        <!-- Slide 4: Our Services -->
+        <section id="services">
+            <h2>خدمات ما</h2>
+            <div class="grid">
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <h3>سیستم های PLC/DCS</h3>
+                    <p>طراحی و پیاده‌سازی سیستم‌های کنترل پیشرفته.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>سیستم های SCADA</h3>
+                    <p>نظارت و کنترل فرآیندهای صنعتی از راه دور.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>شبکه های صنعتی</h3>
+                    <p>طراحی و اجرای زیرساخت‌های ارتباطی صنعتی.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-cogs"></i></div>
+                    <h3>درایوها و موتورها</h3>
+                    <p>تنظیم و بهینه‌سازی سیستم‌های محرکه الکتریکی.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-tools"></i></div>
+                    <h3>نصب و راه‌اندازی</h3>
+                    <p>اجرای حرفه‌ای و تحویل پروژه‌های اتوماسیون.</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <h3>مشاوره و آموزش</h3>
+                    <p>ارائه مشاوره تخصصی و آموزش پرسنل شما.</p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+                <span>پایین بکشید</span>
+            </div>
+        </section>
+
+        <!-- Slide 5: Our Process -->
+        <section id="process">
+            <h2>روش کار ما</h2>
+            <div class="process-flow">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h3>مشاوره و تحلیل</h3>
+                    <p>درک دقیق نیازها و اهداف شما از پروژه.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h3>طراحی و مهندسی</h3>
+                    <p>ارائه راهکارهای فنی و اقتصادی بهینه.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h3>پیاده‌سازی و اجرا</h3>
+                    <p>نصب، برنامه‌نویسی و تست سیستم‌ها.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h3>تحویل و آموزش</h3>
+                    <p>آموزش پرسنل و تحویل کامل پروژه.</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <h3>پشتیبانی</h3>
+                    <p>خدمات پس از فروش و نگهداری بلندمدت.</p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+                <span>پایین بکشید</span>
+            </div>
+        </section>
+
+        <!-- Slide 6: Contact Us -->
+        <section id="contact">
+            <h2>تماس با ما</h2>
+            <p style="max-width: 600px; color: var(--text-color);">آماده‌ایم تا به شما در مسیر اتوماسیون صنعتی کمک کنیم. برای مشاوره رایگان با ما در تماس باشید.</p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>بندرعباس،چهارراه گفت و گو تمدن ها مجتمع پردیس دانشگاه هرمزگان</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-mail-bulk"></i>
+                    <span>کد پستی: 7919774740</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>
+                        <a href="tel:+989172061098">09172061098</a>,
+                        <a href="tel:+989172075573">09172075573</a>
+                    </span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:mlimf942@gmail.com">mlimf942@gmail.com</a>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <!-- Add more social media links as needed -->
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9em; color: #666;">&copy; 2023 انرژی سازان صنعت پویا. کلیه حقوق محفوظ است.</p>
+        </section>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <a href="#intro" class="nav-dot active"></a>
+        <a href="#about" class="nav-dot"></a>
+        <a href="#why-us" class="nav-dot"></a>
+        <a href="#services" class="nav-dot"></a>
+        <a href="#process" class="nav-dot"></a>
+        <a href="#contact" class="nav-dot"></a>
+    </div>
+
+    <script>
+        const presentationContainer = document.querySelector('.presentation-container');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('section');
+
+        function updateNavDots() {
+            let currentActiveDot = 0;
+            let minDistance = Infinity;
+
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                // Calculate distance from the center of the viewport
+                const distance = Math.abs(rect.top + rect.height / 2 - window.innerHeight / 2);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    currentActiveDot = index;
+                }
+            });
+
+            navDots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentActiveDot) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        presentationContainer.addEventListener('scroll', updateNavDots);
+        // Initial call to set active dot on page load
+        updateNavDots();
+
+        // Smooth scroll for nav dots
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Optional: Keyboard navigation for slides
+        document.addEventListener('keydown', (e) => {
+            const currentActiveDot = document.querySelector('.nav-dot.active');
+            let nextSectionIndex = -1;
+
+            if (currentActiveDot) {
+                const currentIndex = Array.from(navDots).indexOf(currentActiveDot);
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    nextSectionIndex = Math.min(currentIndex + 1, sections.length - 1);
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    nextSectionIndex = Math.max(currentIndex - 1, 0);
+                }
+            }
+
+            if (nextSectionIndex !== -1 && navDots[nextSectionIndex]) {
+                sections[nextSectionIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
